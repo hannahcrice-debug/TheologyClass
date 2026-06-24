@@ -41,7 +41,37 @@ body {
 }
 
 /* --- Sidebar --- */
+/* ── Sidebar collapse toggle (all screen sizes) ── */
+.nav-reveal-btn {
+  position: fixed;
+  top: 14px;
+  left: 14px;
+  z-index: 300;
+  background: var(--navy);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 13px;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  display: none;
+  line-height: 1;
+  transition: background 0.2s;
+}
+.nav-reveal-btn:hover { background: var(--crimson); }
+body.nav-hidden .nav-reveal-btn { display: block; }
+body.nav-hidden .sidebar { transform: translateX(-100%); }
+body.nav-hidden .main { margin-left: 0; }
+
+/* On mobile the sidebar is position:relative so transform leaves a gap — hide it entirely instead */
+@media (max-width: 900px) {
+  body.nav-hidden .sidebar { transform: none; display: none; }
+  body.nav-hidden .main { margin-left: 0; margin-top: 0; }
+}
+
 .sidebar {
+  transition: transform 0.25s ease;
   position: fixed; top: 0; left: 0; bottom: 0;
   width: var(--sidebar-w);
   background: var(--navy);
@@ -103,7 +133,7 @@ body {
 }
 
 /* --- Main content --- */
-.main { margin-left: var(--sidebar-w); min-height: 100vh; }
+.main { margin-left: var(--sidebar-w); min-height: 100vh; transition: margin-left 0.25s ease; }
 .page { display: none; }
 .page.active { display: block; animation: fadeUp 0.35s ease; }
 @keyframes fadeUp { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
@@ -418,13 +448,14 @@ mark{background:var(--gold-pale);color:var(--burgundy-deep);font-weight:600;padd
 <body>
 
 <!-- SIDEBAR -->
+<button class="nav-reveal-btn" onclick="toggleNav()" title="Show navigation">☰</button>
 <aside class="sidebar" id="sidebar">
   <div class="sidebar-header">
     <div class="course-num">THEO 1040 · Intensive Seminar</div>
     <h1>The Catholic Intellectual Tradition</h1>
     <div class="subtitle">Scripture, Doctrine, and the Modern World<br>8-Week Intensive Seminar</div>
   </div>
-  <button class="mobile-toggle" onclick="document.getElementById('sidebar').classList.toggle('open')">☰ Course Navigation</button>
+  <button class="mobile-toggle" onclick="toggleNav()">☰ Course Navigation</button>
   <button class="sidebar-search-btn" onclick="openSearch()" title="Search (Ctrl+K)">🔍 Search the seminar</button>
   <nav class="sidebar-nav">
     <div class="nav-section">Prologue</div>
@@ -2205,6 +2236,294 @@ mark{background:var(--gold-pale);color:var(--burgundy-deep);font-weight:600;padd
 
         <h5>Mary as Intercessor</h5>
         <p>Mary occupies a unique position in the Communion of Saints — hence the special term <em>hyperdulia</em>. The theological basis: she is the Mother of God (<em>Theotokos</em>), which means her relationship to the Son is unlike any other creature's. At the Wedding of Cana (John 2:1–11), Mary intercedes with Jesus on behalf of the host and Jesus acts. This is the pattern: Mary brings needs to her Son; her Son responds. Catholic Marian devotion is not the worship of a female deity — it is the recognition that the Mother of Christ has a unique relational standing with her Son, and that standing is generative of grace for those she intercedes for. The <em>Hail Holy Queen</em> — "turn then, most gracious advocate, thine eyes of mercy toward us" — is the prayer of those who trust in that relational standing.</p>
+      </div>
+    </div>
+
+
+    <h3 style="font-family:'Playfair Display',serif;font-size:22px;color:var(--navy);margin:36px 0 16px;padding-top:28px;border-top:2px solid var(--cloud)">Spiritual Warfare and the OCIA Journey</h3>
+    <p class="muted" style="margin-bottom:20px">The Church has always recognized that the period of preparation for baptism is spiritually contested ground. What follows is the full Catholic theology of spiritual warfare — who the enemy is, what to expect, how to discern, and what to do — along with the complete <em>Rules for the Discernment of Spirits</em> from St. Ignatius of Loyola's <em>Spiritual Exercises</em>.</p>
+
+    <div class="lecture">
+      <button class="lecture-toggle" onclick="this.parentElement.classList.toggle('open')">
+        <span class="arrow">▸</span>
+        Spiritual Warfare I: What the Church Actually Teaches About Demonic Activity
+        <span class="tag">Theology · CCC · Angelology</span>
+      </button>
+      <div class="lecture-content">
+        <p>The Church's teaching on demonic activity is not medieval folklore that embarrassed modernity has moved beyond. It is formal doctrine, carried in the Catechism, expressed in the Church's official rites, and defended by every Pope of the modern era. The starting point: the existence and activity of fallen angels is not optional belief.</p>
+
+        <h5>The Catechism's Teaching</h5>
+        <p><strong>CCC 391–395</strong> — Satan and the other demons were created good by God but freely chose evil. Their fall was definitive — no possibility of repentance exists for them (as it does for humans) because their intelligence is so great that their choice, once made, cannot be unmade in the way human choices can be reconsidered. "It is the irrevocable character of their choice, and not a defect in the infinite divine mercy, that makes the angels' sin unforgivable" (CCC 393). They have power to act in the world but only within the limits God permits.</p>
+        <p><strong>CCC 407</strong> — The doctrine of original sin illuminates the situation of humanity: "Ignorant of God's plan, our first parents were seduced by the evil one at the beginning of history." The power Satan and his angels exercise is real, permitted by God for mysterious providential reasons, and limited — but not negligible. "It is a great mystery that Providence should permit diabolical activity, but 'we know that in everything God works for good with those who love him'" (Romans 8:28).</p>
+        <p><strong>CCC 2116–2117</strong> — The Church forbids "consulting horoscopes, astrology, palm reading, interpretation of omens and lots, the phenomena of clairvoyance, and recourse to mediums" — not because these things are silly or superstitious but because they involve "a concession to the enemy" and implicitly acknowledge a power other than God's as authoritative. The prohibition is theological, not merely practical.</p>
+        <p><strong>CCC 2850–2854</strong> — The Lord's Prayer's final petition, "Deliver us from evil," is understood by the Church as asking for deliverance specifically from "a person, Satan, the Evil One, the angel who opposes God." This is the Church's highest-frequency intercessory prayer in history, repeated billions of times daily — and it is explicitly a prayer against a personal spiritual enemy.</p>
+
+        <h5>The Institutional Response</h5>
+        <p>The Church's institutional infrastructure makes clear this is not private theological opinion. Every diocese is required to have a designated exorcist (Code of Canon Law c. 1172). The Vatican revised and published a new Rite of Exorcism in 1999. The OCIA rite contains three formal scrutinies — prayers of minor exorcism — for those preparing for baptism. These are not optional ceremonies: the 1988 RCIA instructions describe the scrutinies as "the most important of the rites celebrated with the elect." The US bishops' rite includes the priest laying hands on the elect and praying: "Cast far from them the spirit of evil, the father of lies."</p>
+        <p>Vatican II's <em>Gaudium et Spes</em> §13 describes the human condition: "A monumental struggle against the powers of darkness pervades the whole history of man." Paul VI stated in a 1972 general audience: "What are the greatest needs of the Church today? Do not let our answer surprise you as being oversimplified or even superstitious and unreal: one of the greatest needs is defense from that evil which is called the Devil." John Paul II's 1986 general audience explicitly affirmed belief in the devil as "real, personal, spiritual" — not symbolic. Benedict XVI and Francis have both spoken in similar terms.</p>
+
+        <h5>What the Church Does NOT Teach</h5>
+        <p>Several clarifications prevent the theology from becoming superstitious: (1) Not everything bad that happens is demonic. Most spiritual dryness, doubt, anxiety, and sin arise from ordinary human weakness, psychology, and the residual effects of original sin — not direct demonic activity. (2) Demonic activity operates within the limits God permits. It cannot override human free will, cannot compel a person to sin, and cannot separate a soul from God against that soul's will. (3) The difference between demonic <em>temptation</em> (universal — offered to every person) and <em>obsession/possession</em> (rare and requiring specific assessment) is significant. What OCIA participants typically experience is temptation and oppression — not possession, which is extraordinary and requires different discernment. (4) Baptized persons in a state of grace have a fundamental protection that catechumens have not yet fully received — which is exactly why the OCIA process provides the scrutinies as interim protection.</p>
+      </div>
+    </div>
+
+    <div class="lecture">
+      <button class="lecture-toggle" onclick="this.parentElement.classList.toggle('open')">
+        <span class="arrow">▸</span>
+        Spiritual Warfare II: Why OCIA? The Battle During Initiation — Documented Examples
+        <span class="tag">OCIA · History · Scrutinies</span>
+      </button>
+      <div class="lecture-content">
+        <p>The question of why demonic interference specifically intensifies during OCIA has a consistent answer across the tradition: the enemy does not bother disturbing people who are going nowhere. When a soul decisively turns toward God and moves toward the sacraments of initiation, it moves toward the most powerful spiritual protection the Church possesses. The opposition is a function of the stakes.</p>
+
+        <h5>The Scrutinies: The Church Expected This</h5>
+        <p>The most important evidence that the Church expects spiritual warfare during OCIA is structural: the three Scrutinies are built into the rite itself. Performed on the Third, Fourth, and Fifth Sundays of Lent for the elect, they are not optional spirituality extras. The RCIA <em>Ordo</em> describes them as "rites for self-searching and repentance" whose purpose is to "uncover, then heal, all that is weak, defective, or sinful in the hearts of the elect" and to "strengthen all that is upright, strong, and good." Each scrutiny includes:</p>
+        <ul style="font-size:14px;line-height:1.75;color:var(--slate);padding-left:20px;margin:10px 0">
+          <li>A Liturgy of the Word focused on a Gospel of conversion (the Samaritan woman, the man born blind, the raising of Lazarus)</li>
+          <li>A period of silent prayer for the elect</li>
+          <li>Intercessions for the elect by the community</li>
+          <li>A prayer of exorcism in which the priest lays hands on the elect and prays for their protection and liberation</li>
+        </ul>
+        <p>The rite's exorcism prayers name what is happening with theological precision: "Cast far from them the spirit of evil and of falsehood, that they may be numbered among the children of your truth." The Church is formally, sacramentally, communally standing between the elect and what opposes them. This structure implies that something opposes them. The Church is not fighting a metaphor.</p>
+        <p>The <em>Rite of Acceptance</em> at the beginning of OCIA also includes the signing of the cross on the forehead, ears, eyes, mouth, heart, shoulders, hands, and feet of each catechumen — a comprehensive marking of the entire person as belonging to Christ. And the baptismal rite itself includes a renunciation: "Do you renounce Satan? And all his works? And all his empty promises?" The triple renunciation at the Easter Vigil implies there is something to renounce, and that the renunciation matters.</p>
+
+        <h5>Documented Examples from Church History</h5>
+        <p><strong>St. Augustine of Hippo (354–430)</strong> — The <em>Confessions</em> is, among other things, a detailed account of spiritual warfare during the years approaching conversion. Augustine describes his will as literally divided against itself: "I was held fast, not in fetters clamped upon me by another, but by my own will's adamantine chain." His famous prayer — "Lord, grant me chastity and continence, but not yet" — describes a soul that sees the truth and cannot move toward it. He retrospectively attributes the resistance not only to his own weakness but to the spiritual powers that benefit from that weakness being maintained. His mother Monica's seventeen years of prayer for his conversion is itself the record of intercession sustained against visible opposition. At the moment of his conversion in the garden at Milan, he wept and heard a child's voice: "Take up and read" — and everything changed. The conversion was sudden; the road to it was contested every step.</p>
+        <p><strong>St. Teresa of Ávila (1515–1582)</strong> — Teresa documents in her <em>Life</em> (chapters 25–32) explicit encounters with what she identifies as the devil during prayer, including being thrown to the ground, hearing mocking voices, and receiving disturbing visions. She also documents the early years of her prayer life as marked by a spiritual mediocrity she found almost impossible to escape — not from lack of effort but from a paralysis that, in retrospect, she recognized as having an adversarial quality. Her remedy, applied with characteristic Spanish directness: "I felt so sure it was the devil that I could not but laugh." She recommends making the sign of the cross, sprinkling holy water, and speaking the name of Christ. Her spiritual director, St. John of Ávila, and later St. Peter of Alcántara helped her distinguish genuine mystical experience from demonic imitation — which is itself evidence that the distinction was actively necessary.</p>
+        <p><strong>St. John Vianney, Curé of Ars (1786–1859)</strong> — The most extensively documented case of demonic harassment in modern Church history. For over thirty-five years, Vianney experienced what he called the "Grappin" — a French slang term for the devil — in his bedroom at night. These were not private visions: other priests staying in his rectory witnessed and documented the sounds (crashing, dragging, voices), physical damage to objects, and at least one fire that began without natural cause. His biographer Abbé Monnin and the Abbé Raymond, who lived with him, documented their own witnessed accounts. Vianney's observation, borne out over decades: the harassment intensified specifically when he was about to receive a major sinner in confession. "When the Grappin makes a great noise," he told his curate, "it is a sign that souls will come from a distance." He had learned to read the opposition as a spiritual indicator — intense spiritual warfare in a given period predicted significant spiritual fruit to follow. He was never harmed. He eventually came to regard the attacks with something approaching boredom.</p>
+        <p><strong>Padre Pio (1887–1968)</strong> — Padre Pio documented and witnesses testified to physical attacks — bruises, wounds, and sounds of combat — primarily in the early years of his priesthood and during periods of major spiritual breakthrough in his ministry. His superiors were sufficiently concerned to investigate, and the conclusions distinguished these from pathological causes. His spiritual director, Padre Benedetto, and later Padre Agostino, guided him through these periods with the counsel consistent with the tradition: pray, remain in obedience, do not be frightened, the power of the enemy is limited. Padre Pio also documented the enemy appearing as a spiritual director, as a beautiful woman, and as various holy figures — anticipating the Week 2 Discernment Rules about the angel of light deception.</p>
+        <p><strong>St. Thérèse of Lisieux (1873–1897)</strong> — During her final illness with tuberculosis, Thérèse experienced an extended period of what she described as temptation against faith itself. Not ordinary doubt, but what she called "a wall" blocking any sense of heaven's existence, accompanied by voices suggesting death was followed by nothing. "The very thought of heaven," she wrote to her prioress, "gives me only conflict and torment." She identified this as coming from an adversarial source ("the enemy," "a voice of darkness") rather than from her own skepticism — she had no natural inclination toward the unbelief being urged. She did not yield to it. She wrote the tempting voices on paper, turned it upside down, and refused to re-read it. She died professing faith. The experience is documented in her last conversations and letters.</p>
+
+        <h5>The OCIA-Specific Pattern</h5>
+        <p>Spiritual directors who work extensively with RCIA populations document a consistent pattern: the period between the Rite of Election (beginning of Lent) and the Easter Vigil has the highest dropout rate of the entire process. Candidates who have persisted for six months or more without significant difficulty suddenly encounter crises, doubts, or practical obstacles in Holy Week specifically. RCIA directors experienced in spiritual warfare name this as a recognized phenomenon and structure their Holy Week accompaniment accordingly — additional contact with candidates, awareness of the pattern, proactive reassurance that crises at this stage are common and do not indicate that OCIA is wrong for them.</p>
+      </div>
+    </div>
+
+    <div class="lecture">
+      <button class="lecture-toggle" onclick="this.parentElement.classList.toggle('open')">
+        <span class="arrow">▸</span>
+        Spiritual Warfare III: What to Expect — Recognizing Spiritual Opposition
+        <span class="tag">Discernment · Patterns · Diagnosis</span>
+      </button>
+      <div class="lecture-content">
+        <p>The most important diagnostic skill is distinguishing spiritual opposition from ordinary anxiety, from the dark night that God himself permits, and from legitimate questions. These are not the same thing, and treating them identically leads either to dismissing real spiritual warfare or to pathologizing every difficulty as demonic. The tradition gives us clear markers.</p>
+
+        <h5>Common Patterns During OCIA</h5>
+        <p><strong>1. Intellectual attacks with an invasive quality.</strong> Not the same as genuine intellectual questions. Genuine questions feel like you want an answer — they're curious, they follow up, they can wait. Spiritual intellectual attacks feel like an intrusion: they arrive in the middle of Mass, during prayer, right before receiving a blessing, and they feel urgent and destabilizing. The content is often not new (you've heard the objections before) but the emotional charge is suddenly overwhelming. The timing is the tell: right at a spiritually significant moment, not during a calm afternoon at your desk.</p>
+        <p><strong>2. Convergent life disruptions.</strong> Not every crisis during OCIA is spiritually caused, but RCIA directors consistently note that crises cluster around key moments — the Rite of Election, the Scrutinies, Holy Week. A relationship falls apart, a job becomes precarious, a family member becomes ill, a financial emergency arrives — all within weeks of a major liturgical milestone. Individual crises are ordinary; the convergence is notable. The traditional guidance: acknowledge the crisis, address it practically, and do not use it as a reason to delay sacramental commitment. The enemy will use legitimate suffering as an exit ramp if you let him.</p>
+        <p><strong>3. Targeted discouragement and heaviness.</strong> A general spiritual weight specifically connected to faith activities. You feel fine everywhere else but going to Mass takes unusual effort, reading Scripture produces nothing, prayer feels pointless. The distinguishing mark is the specificity — it is not general depression (which affects all of life) but targeted heaviness around exactly the activities that are drawing you toward the sacraments. The tradition's name for a milder form of this is <em>acedia</em> — spiritual sloth — but the targeted version has a quality of opposition rather than laziness.</p>
+        <p><strong>4. Relational opposition.</strong> People who were previously neutral or supportive suddenly and disproportionately hostile to your OCIA participation. Sometimes this is purely human — conversion disrupts social dynamics and the people around you may feel uncomfortable or threatened. But spiritual directors note that the intensity sometimes exceeds what the natural explanation accounts for, and that it clusters at the same key liturgical moments that other patterns cluster around. The enemy works through people who are themselves spiritually unguarded.</p>
+        <p><strong>5. Sleep disturbances and oppressive dreams.</strong> Not universal, but consistently reported around key OCIA moments. Particularly disturbing and vivid dreams that don't follow the pattern of ordinary stress dreams, often featuring religious imagery in disturbing or mocking contexts. The tradition addresses this directly: the prayer of Compline (Night Prayer, Psalm 91) and signing oneself with blessed water before sleep have been recommended for exactly this purpose since the early Church.</p>
+        <p><strong>6. Intensification of old temptations.</strong> Temptations or patterns of sin that were previously quiet suddenly seem much louder. The tradition is consistent: the enemy attacks at known weak points (Rule 14 of Ignatius's discernment rules). Whatever your particular vulnerability is, expect it to be addressed more forcefully during OCIA, particularly in Lent. This is not a sign that conversion is not working. It is a sign that something is fighting the conversion.</p>
+
+        <h5>The Discernment Diagnostic — What It Is vs. What It Isn't</h5>
+        <p>Four things that can look like spiritual warfare but aren't:</p>
+        <p><strong>Ordinary anxiety about a major life decision.</strong> OCIA is a significant commitment — changing your religious identity, affecting your relationships, making a public profession. Anxiety about this is proportional and psychologically normal. It tends to be future-focused ("what will my family think?" "what if I can't keep the commitments?") and responds to reassurance, practical planning, and honest conversation.</p>
+        <p><strong>The Holy Spirit's purgative work.</strong> God sometimes allows darkness, dryness, and discomfort as part of genuine spiritual growth (see the Dark Night of the Senses lecture). This feels like an absence rather than an attack. The distinguishing mark: purgative darkness tends to co-exist with genuine peace at a deep level — "peaceful even though nothing feels peaceful." Spiritual warfare tends to disrupt that deep peace.</p>
+        <p><strong>Legitimate intellectual questions.</strong> If a question about the faith wants an answer, feels patient, and is proportional to the evidence, it is probably a genuine inquiry — which deserves a genuine answer, not a rebuke. See Week 2 (Historical Reliability) and Week 1 (the Modernist Crisis) for resources for serious questions. The Church has never asked anyone to suppress genuine intellectual inquiry.</p>
+        <p><strong>Psychological patterns predating OCIA.</strong> Trauma, depression, anxiety disorders, and attachment patterns are real and need appropriate human treatment. They may be activated by OCIA's intensity without being caused by spiritual warfare. The appropriate response is both: address the human need through appropriate human means (counseling, medical support) AND address the spiritual dimension through the spiritual means the tradition provides. These are not competing responses.</p>
+        <p>The clearest single diagnostic from Ignatius and the broader tradition: <strong>genuine spiritual opposition tends to arrive as an intrusion that disturbs a peace that was actually present.</strong> It has an invasive quality — something pushing against you from outside. The dark night feels like the loss of a light that was there. Anxiety feels like a calculation about the future. Spiritual warfare feels like something actively pushing you away from where you are trying to go.</p>
+      </div>
+    </div>
+
+    <div class="lecture">
+      <button class="lecture-toggle" onclick="this.parentElement.classList.toggle('open')">
+        <span class="arrow">▸</span>
+        Spiritual Warfare IV: Rules for the Discernment of Spirits, Part I — The Fourteen Week 1 Rules
+        <span class="tag">Ignatius of Loyola · Consolation · Desolation · Spiritual Exercises</span>
+      </button>
+      <div class="lecture-content">
+        <p>The <em>Rules for the Discernment of Spirits</em> appear in St. Ignatius of Loyola's <em>Spiritual Exercises</em> (written 1522–1524, approved by Pope Paul III in 1548). They are the most practically useful guide to distinguishing the movements of different spiritual agents in the human soul that the Catholic tradition has produced. They derive not from theory but from Ignatius's own careful observation of his interior life during his recovery from the wounds sustained at Pamplona — noticing that different types of reading and reflection left him feeling different afterward, and beginning to map those patterns.</p>
+        <p>The Week 1 Rules apply to people in mortal sin or at the beginning of conversion — where the movements of spirits are relatively gross and easier to detect. The Week 2 Rules (the following lecture) address more subtle deceptions for those advancing in spiritual life.</p>
+
+        <h5>Essential Definitions First</h5>
+        <div class="card-grid" style="margin:16px 0">
+          <div class="card" style="border-top-color:var(--crimson)">
+            <h4 style="color:var(--crimson)">Spiritual Consolation</h4>
+            <p>Any interior movement in which the soul is inflamed with love of God. Tears of love or sorrow for sin. Every increase of faith, hope, and charity. Every interior joy that attracts and calls toward heavenly things, and to the salvation of one's soul — bringing quiet and peace in its Creator and Lord. It is not the same as happiness or pleasant feeling; it may occur in the midst of suffering. The essence is <em>movement toward God</em>.</p>
+          </div>
+          <div class="card" style="border-top-color:var(--navy)">
+            <h4 style="color:var(--navy)">Spiritual Desolation</h4>
+            <p>Darkness of soul, turmoil of spirit, inclination to what is low and earthly. Restlessness arising from various agitations and temptations. Movement toward loss of faith, loss of hope, loss of love. A lazy, lukewarm, sad spirit — as if separated from God. It is not the same as sadness or suffering; it may occur even when external circumstances are good. The essence is <em>movement away from God</em>.</p>
+          </div>
+        </div>
+
+        <h5>The Fourteen Rules (Spiritual Exercises §§313–327)</h5>
+        <p><strong>Rule 1 — The Two Directions of Spiritual Influence</strong></p>
+        <p>In a person moving from sin toward God: the enemy disturbs, saddens, puts up obstacles, and disquiets with false reasoning — trying to prevent the forward movement. The good spirit gives courage, strength, consolation, tears, inspirations, and a quiet peace. In a person moving away from God (or stagnant): the pattern reverses — the enemy offers pleasures and consolations ("don't worry about it, enjoy your life") while the good spirit uses reason and conscience to produce remorse and unease. The first step in discernment: which direction are you actually moving?</p>
+        <p><strong>Rule 2 — The Direction of Movement Predicts the Source</strong></p>
+        <p>In a person genuinely turning toward God, genuine consolation tends to come from the good spirit; desolation tends to come from the enemy. This rule has one important exception — Rules 5 and 9 below explain the circumstances when God himself allows desolation for beneficial purposes. But the default: if you are sincerely trying to move toward God and you are experiencing disquiet, opposition, and darkness, its source is adverse rather than divine.</p>
+        <p><strong>Rule 3 — The Definition and Experience of Consolation</strong></p>
+        <p>Ignatius gives three forms: (1) the soul is inflamed with love of God, (2) the person weeps for love of God or for the sins they have committed, or (3) every increase of faith, hope, and charity, and every interior joy that draws the soul toward God and the salvation of souls. Consolation is not comfort or pleasant feeling — a person may weep intensely and be in deep consolation. The test is whether the movement is toward God or not. Consolation always orients.</p>
+        <p><strong>Rule 4 — The Definition and Experience of Desolation</strong></p>
+        <p>Darkness of soul; disturbance of the spirit; attraction toward low, earthly, sensual things; restlessness from various agitations; lack of faith, hope, and love; sadness and lethargy; the sense of being separated from God. Important clarification: desolation in this sense is a spiritual state, not a psychological mood. A person can be psychologically peaceful while in spiritual desolation, and psychologically distressed while in spiritual consolation. The spiritual and psychological dimensions are related but not identical.</p>
+        <p><strong>Rule 5 — Do Not Change Decisions in Desolation</strong></p>
+        <p>In times of desolation, one should never make a change in previous resolutions. The reason is precise: in desolation, the enemy is the one counseling and guiding. Any decision made under the enemy's influence will tend toward what benefits the enemy, not what benefits the soul. Hold firm to resolutions made in consolation. <em>Application to OCIA:</em> if you were moving toward Easter Vigil in consolation and peace, and suddenly in desolation you feel like dropping out — the Rule says: hold firm. Do not act on the desolation. The decision to continue, made in consolation, stands.</p>
+        <p><strong>Rule 6 — Counter-Attack in Desolation</strong></p>
+        <p>Although we must not change our prior decisions, we should change our intensity. In desolation, one should insist more on prayer, meditation, frequent examination of conscience, and increase in penance. The enemy's goal in desolation is to reduce our spiritual effort — to make us pray less, practice less, care less. The counterintuitive response is the correct one: when prayer feels useless, pray more. When Mass feels empty, go more attentively. The feeling of fruitlessness does not mean the activity is fruitless. <em>This is one of the most practically important rules for OCIA participants.</em></p>
+        <p><strong>Rule 7 — The Purpose of Desolation from God's Perspective</strong></p>
+        <p>When in desolation, consider that God is testing us and that we are required to hold firm using our own natural powers. Desolation is the training ground where we learn what we actually are without the felt support of consolation. God allows this not from indifference but because genuine virtue must be capable of operating without felt support. The person who can only pray when prayer feels good has not yet understood prayer.</p>
+        <p><strong>Rule 8 — Patience in Desolation; Humility in Consolation</strong></p>
+        <p>The person in desolation works to remain in patience, which is the opposite virtue to the troubles desolation brings. Patience is not passive waiting but active endurance with dignity. The person in consolation uses the grace of that time to store up the strength they will need when desolation comes — because it will come. Neither state is permanent.</p>
+        <p><strong>Rule 9 — Three Reasons God Permits Desolation</strong></p>
+        <p>God allows desolation for three main reasons: (a) Because of our negligence, tepidity, and laziness — desolation is the consequence of having allowed our spiritual practice to become lax. (b) To test us — to see what we will do with our free will when the consolation that was, in a sense, doing most of the work is removed. Will we remain faithful without felt reward? (c) To give us true self-knowledge — to let us experience directly how little we can sustain through our own powers without divine assistance, and therefore how completely we depend on grace. This prevents spiritual pride.</p>
+        <p><strong>Rule 10 — In Consolation, Prepare for Desolation</strong></p>
+        <p>One experiencing consolation should think about how they will conduct themselves in future desolation. Store up the wisdom, the commitments, and the resolutions made in consolation so that they can be drawn upon when the darkness comes. This is why writing in a spiritual journal during periods of clarity is valuable — you will not remember clearly what peace felt like when you are in the middle of desolation, and having your own past testimony available helps you trust that consolation will return.</p>
+        <p><strong>Rule 11 — Humble in Consolation; Confident in Desolation</strong></p>
+        <p>In consolation, humble yourself — remember that you cannot sustain this by yourself, that it is gift, not achievement. In desolation, recall that you have been in consolation before and will be again; the desolation is not the truth about your final state. These two attitudes — humility in consolation and confidence in desolation — are the emotional dispositions that keep the soul balanced through both states.</p>
+        <p><strong>Rule 12 — The Enemy Is Like a Bully</strong></p>
+        <p>The enemy is like a person who argues with someone and wants to overcome them: if the other side shows fear and withdraws, the aggressor attacks more boldly; if the other side stands firm and shows no fear, the aggressor retreats. The enemy similarly loses courage and retreats when the person in the spiritual life faces temptations with firmness, doing exactly the opposite of what they are being urged to do. <em>Practical application:</em> naming the temptation out loud, confronting it directly in prayer ("I recognize what this is and I reject it"), standing firm — these cause the enemy to retreat. Showing fear, accommodating, negotiating — these invite escalation.</p>
+        <p><strong>Rule 13 — The Enemy Is Like a Seducer</strong></p>
+        <p>A seducer who seeks a secret relationship wants everything kept hidden: if his target reveals the relationship to someone who can help, his power is broken. The enemy behaves similarly: when he makes a suggestion to a righteous soul, he urges that it be kept secret. He is displeased and undone the moment the soul reveals the temptation or attack to a confessor, spiritual director, or trusted guide. <em>This is one of the most practically transformative rules for OCIA participants.</em> The moment you name what you're experiencing — to your sponsor, your RCIA director, your priest — its power begins to diminish. Secrets empower the enemy; transparency disempowers him.</p>
+        <p><strong>Rule 14 — The Enemy Is Like a Military Commander</strong></p>
+        <p>A general surveys the fortifications to find where they are weakest, then concentrates the attack there. The enemy does the same: he observes our virtues and vices to find our weakest point — our most persistent sin, our deepest wound, our most vulnerable relationship — and attacks there. Self-knowledge, therefore, is both a spiritual virtue and a tactical necessity. Knowing your own weak points is not morbid self-examination; it is the self-knowledge that allows you to anticipate where the assault is likely to come and to reinforce that point in advance. Ignatius recommended what he called the <em>particular examen</em> — a daily five-minute focused examination specifically of one's known area of greatest vulnerability.</p>
+      </div>
+    </div>
+
+    <div class="lecture">
+      <button class="lecture-toggle" onclick="this.parentElement.classList.toggle('open')">
+        <span class="arrow">▸</span>
+        Spiritual Warfare V: Rules for the Discernment of Spirits, Part II — The Week 2 Rules (Advanced)
+        <span class="tag">Ignatius · Angel of Light · Advanced Discernment · Spiritual Exercises</span>
+      </button>
+      <div class="lecture-content">
+        <p>The Week 2 Rules (Spiritual Exercises §§328–336) are for people who have made progress in the spiritual life. At this stage, the enemy's tactics change: he no longer attacks primarily through obviously sinful temptations (which an advancing soul recognizes easily) but through false consolation, counterfeit spiritual experience, and the disguise of a good spirit. This is the "angel of light" problem — the most theologically sophisticated and practically dangerous form of spiritual deception.</p>
+        <div class="alert alert-gold"><span>⚠️</span><div>The Week 2 Rules apply to people with an established interior life. New OCIA participants primarily need the Week 1 Rules. But the Week 2 Rules are included here because (a) some OCIA participants come from other contemplative traditions with developed interior lives, and (b) every Catholic will eventually need them as their spiritual life matures.</div></div>
+
+        <h5>The Eight Week 2 Rules (Spiritual Exercises §§328–336)</h5>
+        <p><strong>Rule 1 — God and the Good Spirit Give Genuine Consolation</strong></p>
+        <p>God and the good angels give consolation characterized by their nature: peace, joy, increase in genuine love. The enemy, by his nature, typically gives desolation. This is the baseline for Week 2 — but it must be immediately complicated by the rules that follow, because the enemy can and does counterfeit consolation.</p>
+        <p><strong>Rule 2 — Consolation Without Preceding Cause Is from God Alone</strong></p>
+        <p>This rule distinguishes between consolation that "comes from nowhere" and consolation that has an identifiable preceding cause. Consolation without any preceding cause — arising without any thought, feeling, or circumstance that could explain it — is the safest form of consolation; it can only come from God. The enemy cannot manufacture ex nihilo spiritual experience of this kind. If you are simply overcome with love for God without any external stimulus, this is from God. However, the interpretation and application of even this consolation may need discernment — the rule refers to the onset of the experience, not everything that follows from it.</p>
+        <p><strong>Rule 3 — Consolation With a Preceding Cause Requires Discernment</strong></p>
+        <p>When consolation has a preceding cause — when it arises from a thought, a word, a beautiful sunset, a moving homily — it may come from the good or evil spirit. Both can produce consolation in response to stimuli. The soul must examine the whole arc: where did it begin? where did it lead? what did it produce in terms of actual virtue and obedience? The end reveals the source.</p>
+        <p><strong>Rule 4 — The Angel of Light Disguise</strong></p>
+        <p>The enemy's characteristic Week 2 strategy: "It is proper to the evil angel, who forms himself under the appearance of an angel of light, to enter with the devout soul and go out with himself" (Spiritual Exercises §332). He begins with consolation, good thoughts, holy desires — things consistent with what a devout soul wants. He accompanies the soul through this beginning. Then gradually, imperceptibly, he "goes out with himself" — steering the thoughts and desires toward something that serves his own purposes: pride, disobedience, isolation from community, departure from the confessor's guidance, or spiritual grandiosity. The beginning is good; the end reveals the deception. <em>This is why spiritual direction is not optional for advancing souls: an experienced director will see the arc that the person inside the experience cannot see.</em></p>
+        <p><strong>Rule 5 — Attend to the Whole Arc, Not Just the Beginning</strong></p>
+        <p>The soul experiencing a spiritual movement must attend to its beginning, its course, and its end. A movement that begins with great consolation and gradually produces anxiety, pride, scrupulosity, disobedience, or isolation from community reveals by its end that its beginning was not what it appeared to be. This rule requires the discipline of examining spiritual experiences retrospectively — not just enjoying them or accepting them uncritically at the moment but returning to them afterward to assess their full trajectory.</p>
+        <p><strong>Rule 6 — False Consolation as a Sequel to Genuine Consolation</strong></p>
+        <p>The most subtle deception: after a period of genuine consolation from God, the enemy introduces a continuation or extension of that consolation that is false. He takes advantage of the soul's openness after a genuine divine encounter to introduce something of his own. The soul, still in the glow of genuine experience, may not notice the transition. This is why particular vigilance is needed immediately after periods of strong consolation — the soul is open, which is a vulnerability as well as a blessing.</p>
+        <p><strong>Rule 7 — How the Two Spirits Touch the Soul Differently</strong></p>
+        <p>This rule provides the most precise phenomenological distinction in Ignatius's rules. The good spirit touches the soul "sweetly, lightly, and gently, like a drop of water entering a sponge." The soul receives the movement without resistance, without disturbance, without the sensation of boundary being crossed — because the movement is coming from the same "side" as the soul's own orientation toward God. The enemy touches the soul "with noise, commotion, and disturbance, like a drop of water falling upon a stone." There is a sharp sensation, a clash, a disturbance — because the movement is coming from the opposite direction to the soul's orientation toward God. These effects are reversed in souls oriented away from God. The practical application: pay attention to the texture of spiritual movements, not just their content.</p>
+        <p><strong>Rule 8 — Examining the Collateral Consolation That Lingers</strong></p>
+        <p>When the main experience of consolation fades, what remains? Ignatius recommends careful attention to the "collateral consolation" — the thoughts, feelings, and movements that linger after the peak experience has passed. These are often where discernment is most reliable: the main experience may be overwhelming and difficult to assess, but what it leaves behind tends to reveal its source more clearly. Genuine divine consolation tends to leave behind humility, increased love, greater desire for service, and deeper peace. False consolation tends to leave behind spiritual pride, grandiosity, a sense of special election, or increased self-focus.</p>
+
+        <h5>Practical Summary of Both Sets</h5>
+        <div class="card-grid" style="margin-top:16px">
+          <div class="card" style="border-top-color:var(--forest)">
+            <h4>Signs the Movement Is from the Good Spirit</h4>
+            <p>Increases genuine love for God and neighbor • Produces genuine humility • Increases desire for the ordinary means of grace (prayer, sacraments, Scripture) • Supports obedience to legitimate authority • Is consistent with the Church's teaching • Can be shared openly with a spiritual director without discomfort • Leaves peace even when it involves challenge • Its end is consistent with its beginning</p>
+          </div>
+          <div class="card" style="border-top-color:var(--crimson)">
+            <h4>Signs the Movement Is from the Enemy</h4>
+            <p>Urges secrecy or private illumination • Produces spiritual pride or sense of special election • Encourages isolation from community or direction • Is inconsistent with Church teaching or the advice of a confessor • Gradually steers away from ordinary virtue toward extraordinary experience • Begins well but ends in anxiety, scrupulosity, or pride • Feels like an intrusion, not an invitation • Its end contradicts its beginning</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lecture">
+      <button class="lecture-toggle" onclick="this.parentElement.classList.toggle('open')">
+        <span class="arrow">▸</span>
+        Spiritual Warfare VI: What to Do — The Active Response and Protective Practices
+        <span class="tag">Practical Guide · Sacramentals · Spiritual Direction</span>
+      </button>
+      <div class="lecture-content">
+        <p>The tradition is consistent and concrete on the response to spiritual warfare. There is no single dramatic solution — the response is a set of overlapping protective practices that reinforce each other. None of them is magic; all of them are participation in the grace God provides through the ordinary and extraordinary means of the Church.</p>
+
+        <h5>The Immediate Response When Under Attack</h5>
+        <p><strong>1. Name it — break the secrecy.</strong> Rule 13 above: the enemy depends on secrecy. The moment you name what you are experiencing to a trusted person — your sponsor, RCIA director, priest, or spiritual director — you begin to break its power. You do not need to be certain that what you are experiencing is spiritual warfare to speak about it. "I'm finding it hard to continue OCIA" or "everything seems to be going wrong at once" or "I can't shake the feeling that this is wrong for me" — these are sufficient. Naming it begins the reversal.</p>
+        <p><strong>2. Do not act on desolation (Rule 5).</strong> Do not make the decision to drop out of OCIA, step back from prayer, or change your commitments while you are in a period of spiritual difficulty. The decision to continue was made in consolation and clarity. Hold it. If you still want to change course after the storm has passed and you have returned to consolation, that is a different conversation. But decisions made in desolation tend to be decisions you will regret.</p>
+        <p><strong>3. Counter-attack rather than withdraw (Rule 6).</strong> The counterintuitive response is the correct one. Prayer feels empty: pray more. Mass feels hollow: go more attentively. The Rosary feels mechanical: say it more slowly. The feeling of fruitlessness is the enemy's desired outcome. Refusing to grant it — showing up anyway, doing the spiritual work even when it feels pointless — is the response that works.</p>
+        <p><strong>4. Resist with firmness, not fear (Rule 12).</strong> The enemy retreats when faced with firm resistance. Speak to him directly in prayer if necessary: "I renounce you and everything you are trying to do here, in the name of Jesus Christ." You are not dealing with an equal power. The name of Christ is sufficient. Do not negotiate, entertain, or accommodate; face it and reject it.</p>
+        <p><strong>5. Use the Church's rites as intended.</strong> Attend the Scrutinies. Go to the Rite of Election. Let the priest lay hands on you. These are not ceremonies — they are the Church formally exercising its authority on your behalf. The elect who skip the scrutinies because they seem awkward or unfamiliar are skipping the rites specifically designed for their protection.</p>
+
+        <h5>Longer-Term Protective Practices</h5>
+        <p><strong>Sacramental Confession</strong> — For catechumens who have not yet been baptized, confession is not yet available; but meeting with a priest to pray for you and discuss what you are experiencing is entirely appropriate and beneficial. For already-baptized candidates completing initiation, regular confession is one of the most powerful protective practices in the Church's arsenal. Unconfessed serious sin creates what the tradition calls a "foothold" — an opening for adversarial spiritual influence.</p>
+        <p><strong>Blessed Water</strong> — The Church's instructions for blessing and using holy water are explicit. Keep some at home (your parish distributes it for free). Use it when you enter church, when you leave home for significant engagements, before sleep. This is not superstition — it is a sacramental, an outward act that the Church has designated as carrying spiritual grace in proportion to the faith with which it is used. The early Church used water exorcistically from very early; the practice is ancient and theologically grounded.</p>
+        <p><strong>Fasting</strong> — Matthew 17:21 records Jesus telling his disciples that a particular kind of demonic oppression "can only be driven out by prayer and fasting." The combination is the tradition's recommended response to serious spiritual warfare. The Fridays of Lent, the traditional Friday abstinence, and additional fasting during particularly difficult periods are all traditional practices with this theological grounding.</p>
+        <p><strong>Sacramentals — Scapular and Miraculous Medal</strong> — The Brown Scapular of Our Lady of Mount Carmel and the Miraculous Medal (given through St. Catherine Labouré, 1830) are among the most widely used Catholic sacramentals and have extensive lay testimonies to their protective effects. These are not amulets — their power comes from the intercession of the Virgin Mary and from the faith of the wearer, not from the objects themselves. But the Church officially endorses them as legitimate expressions of Catholic devotion with genuine protective dimensions.</p>
+        <p><strong>The Liturgy of the Hours — Especially Compline</strong> — Night Prayer (Compline) has been the Church's formal protection prayer for the night since the early monastic period. It includes Psalm 91 ("you will not fear the terror of the night"), the Nunc Dimittis, and an explicit Marian antiphon. People who pray it regularly report a qualitative difference in the character of their nighttime experience — particularly relevant for those reporting sleep disturbances.</p>
+        <p><strong>Staying in Community</strong> — The enemy finds isolated people easier to work with. Stay close to your RCIA community, your parish, your sponsor. This is not merely human emotional support (though it is that too); it is the reality of the Body of Christ: the spiritual strength of the community is shared. A person isolated from the Body is spiritually more vulnerable than a person embedded in it.</p>
+        <p><strong>Spiritual Direction</strong> — If you do not have a spiritual director, the period of OCIA is the right time to get one. A spiritual director is not a therapist (though they may refer you to one). They are someone trained in the tradition of discernment who can help you distinguish what you are experiencing — divine invitation, human anxiety, or adversarial opposition — and who hold you accountable to the responses the tradition recommends. The Archdiocese of Sacramento and most dioceses maintain lists of trained spiritual directors.</p>
+
+        <h5>What NOT to Do</h5>
+        <p>Equally important: things to avoid that the tradition and common sense both identify as counterproductive or actively dangerous.</p>
+        <p>Do not attempt formal solemn exorcism yourself or through an unordained person. Solemn exorcism (the <em>Rite of Exorcism</em>) is reserved to ordained priests specifically authorized by their bishop. Lay people attempting solemn exorcism on themselves or others risk serious spiritual harm. What lay people can appropriately do: pray deliverance prayers (below), use blessed water and sacramentals, pray the Rosary and Psalm 91, invoke the saints. These are all within lay spiritual authority.</p>
+        <p>Do not seek out psychics, mediums, Ouija boards, or occult practices — including in the guise of spiritual curiosity or investigation. The Catechism's prohibition (CCC 2116) is not arbitrary. Opening those doors during OCIA, when your spiritual defenses are already under pressure, creates serious additional vulnerability.</p>
+        <p>Do not demonize everything negative. Not every bad feeling, difficult relationship, or life problem is spiritual warfare. Discernment requires the willingness to consider natural explanations alongside supernatural ones. Naming everything as demonic can produce fear, paranoia, and an unhealthy spiritual orientation. The tradition is balanced: real, but proportionate.</p>
+      </div>
+    </div>
+
+    <div class="lecture">
+      <button class="lecture-toggle" onclick="this.parentElement.classList.toggle('open')">
+        <span class="arrow">▸</span>
+        Spiritual Warfare VII: Prayers for Spiritual Warfare — Full Texts and Instructions
+        <span class="tag">St. Michael · Psalm 91 · Anima Christi · Rosary · Litany</span>
+      </button>
+      <div class="lecture-content">
+        <p>These are the prayers the Church has designated for protection against spiritual opposition. They are not magic formulas — their power comes from the faith of the person praying, the mediation of Christ, and the intercession of the saints. Use them regularly, not only in crisis. The tradition recommends establishing a daily baseline of protection prayer so that the tools are familiar when crisis comes.</p>
+
+        <h5>The Prayer to St. Michael the Archangel</h5>
+        <p>Composed by Pope Leo XIII in 1884 after a vision of the battle between St. Michael and Satan. Originally required after Low Mass worldwide; still commonly prayed after Mass in many parishes.</p>
+        <div class="enc-text" style="background:#f9f5f0;border-left:3px solid var(--gold);padding:18px 20px;border-radius:0 6px 6px 0;font-size:14px;line-height:1.85;font-style:italic;margin:14px 0">
+          Saint Michael the Archangel, defend us in battle. Be our protection against the wickedness and snares of the Devil. May God rebuke him, we humbly pray; and do Thou, O Prince of the Heavenly Host, by the Power of God, cast into hell Satan and all the evil spirits who prowl about the world seeking the ruin of souls. Amen.
+        </div>
+        <p style="font-size:13px;color:var(--stone)">For particularly serious situations, the longer traditional form — a full prayer Leo XIII composed based on his vision — begins: "O glorious Archangel Saint Michael, Prince of the heavenly host, be our defense in the terrible warfare which we carry on against principalities and powers, against the rulers of this world of darkness, spirits of evil..." Ask your priest for the complete text, or find it in any traditional Catholic prayer book.</p>
+
+        <h5>Psalm 91 — The Psalm of Protection</h5>
+        <p>Used for protection prayer since the patristic period and appointed by the Church for Compline (Night Prayer) precisely because of its protective character. Pray it slowly before sleep, or any time you sense spiritual opposition.</p>
+        <div class="enc-text" style="background:#f9f5f0;border-left:3px solid var(--gold);padding:18px 20px;border-radius:0 6px 6px 0;font-size:14px;line-height:1.9;font-style:italic;margin:14px 0">
+          He who dwells in the shelter of the Most High will rest in the shadow of the Almighty. I will say of the Lord, "He is my refuge and my fortress, my God, in whom I trust."<br><br>
+          Surely he will save you from the fowler's snare and from the deadly pestilence. He will cover you with his feathers, and under his wings you will find refuge; his faithfulness will be your shield and rampart.<br><br>
+          You will not fear the terror of night, nor the arrow that flies by day, nor the pestilence that stalks in the darkness, nor the plague that destroys at midday. A thousand may fall at your side, ten thousand at your right hand, but it will not come near you.<br><br>
+          For he will command his angels concerning you to guard you in all your ways; they will lift you up in their hands, so that you will not strike your foot against a stone. You will tread on the lion and the cobra; you will trample the great lion and the serpent.<br><br>
+          "Because he loves me," says the Lord, "I will rescue him; I will protect him, for he acknowledges my name. He will call on me, and I will answer him; I will be with him in trouble, I will deliver him and honor him. With long life I will satisfy him and show him my salvation." (Psalm 91, selected verses, NIV)
+        </div>
+
+        <h5>The Anima Christi</h5>
+        <p>One of the oldest and most beloved Catholic prayers, dating to at least the 14th century. St. Ignatius placed it at the beginning of the <em>Spiritual Exercises</em>. It is a comprehensive prayer of surrender to Christ — placing every dimension of the person under his protection.</p>
+        <div class="enc-text" style="background:#f9f5f0;border-left:3px solid var(--gold);padding:18px 20px;border-radius:0 6px 6px 0;font-size:14px;line-height:1.9;font-style:italic;margin:14px 0">
+          Soul of Christ, sanctify me.<br>
+          Body of Christ, save me.<br>
+          Blood of Christ, inebriate me.<br>
+          Water from the side of Christ, wash me.<br>
+          Passion of Christ, strengthen me.<br>
+          O good Jesus, hear me.<br>
+          Within Thy wounds hide me.<br>
+          Suffer me not to be separated from Thee.<br>
+          From the malicious enemy defend me.<br>
+          In the hour of my death call me<br>
+          and bid me come to Thee,<br>
+          that with Thy saints I may praise Thee<br>
+          for ever and ever. Amen.
+        </div>
+
+        <h5>Sub Tuum Praesidium — The Oldest Marian Prayer</h5>
+        <p>Dated to approximately 250 AD — the oldest known Christian prayer addressed to Mary, discovered on a Greek papyrus in Egypt in 1917. Used as protection prayer for seventeen centuries.</p>
+        <div class="enc-text" style="background:#f9f5f0;border-left:3px solid var(--gold);padding:18px 20px;border-radius:0 6px 6px 0;font-size:14px;line-height:1.9;font-style:italic;margin:14px 0">
+          We fly to thy patronage, O holy Mother of God;<br>
+          despise not our petitions in our necessities,<br>
+          but deliver us always from all dangers,<br>
+          O glorious and blessed Virgin. Amen.
+        </div>
+
+        <h5>A Lay Deliverance Prayer</h5>
+        <p>The Church distinguishes solemn exorcism (reserved to authorized priests) from deliverance prayer, which lay people may use for themselves. This form is consistent with traditional Catholic prayer and may be prayed by any baptized person — or by a catechumen as a petition for protection pending their baptism:</p>
+        <div class="enc-text" style="background:#f9f5f0;border-left:3px solid var(--gold);padding:18px 20px;border-radius:0 6px 6px 0;font-size:14px;line-height:1.9;font-style:italic;margin:14px 0">
+          Lord Jesus Christ, I come before you just as I am. I am sorry for my sins; I repent of them and ask your forgiveness. I believe that you died on the cross for me, rose from the dead, and are now seated at the right hand of the Father.<br><br>
+          In your name and by the power of your cross and your blood, I renounce any involvement — witting or unwitting — with any spiritual power that opposes you. I break any hold that the enemy has been permitted to exercise over me, and I ask that your angels be stationed around me and that the protection of your blood cover me completely.<br><br>
+          Lord, I invite your Holy Spirit to fill every place that has been emptied by this prayer, and to reign there without opposition. I place myself under your authority and that of your Church. Through the intercession of the Blessed Virgin Mary, St. Michael the Archangel, and all the saints, protect me from all evil this day. Amen.
+        </div>
+
+        <h5>The Rosary as Protective Prayer</h5>
+        <p>The Rosary is consistently recommended by the tradition and by the saints specifically as a weapon against spiritual opposition, not merely a devotional exercise. The theological reasons: (1) It meditates on the life, death, and resurrection of Christ — keeping the mind anchored in the events of salvation while the devil works primarily through distraction, confusion, and disconnection from these realities. (2) It invokes the intercession of Mary — whom the tradition describes, citing Genesis 3:15 (the <em>Protoevangelium</em>), as the one whose offspring will crush the serpent's head. (3) The repetitive structure creates what the tradition calls "the rhythm of prayer" — a form of sustained attention that the enemy finds difficult to disrupt. Pray one decade daily as a minimum; a full rosary (four mysteries, twenty decades) during periods of particular difficulty.</p>
+
+        <h5>The Divine Mercy Chaplet</h5>
+        <p>Given to St. Faustina Kowalska (1905–1938) and particularly recommended during desolation because its entire content is a petition for God's mercy — anchoring the soul in God's character rather than in its own condition. Prayed on rosary beads. "For the sake of his sorrowful Passion, have mercy on us and on the whole world" — repeated until the mind anchors in God's mercy rather than in the fear or darkness of the present moment. Particularly powerful when prayed at 3 PM (the Hour of Mercy) on Fridays.</p>
+
+        <h5>The Litany of the Saints</h5>
+        <p>The prayer that explicitly invokes the entire Communion of Saints — the Church Triumphant — as spiritual covering. Sung at Easter Vigil (over the elect, no less — specifically for the protection of those about to be baptized), at ordinations, and in times of particular need. The structure is simple: invocations of individual saints followed by the response "pray for us," culminating in petitions to Christ. It is the most comprehensive invocation of the Church's entire spiritual community that the liturgy provides. Many OCIA participants find it particularly meaningful to pray during Holy Week, understanding themselves to be surrounded by the "great cloud of witnesses" (Hebrews 12:1) as they approach Easter Vigil.</p>
       </div>
     </div>
 
@@ -5931,16 +6250,23 @@ mark{background:var(--gold-pale);color:var(--burgundy-deep);font-weight:600;padd
     var page = document.getElementById('page-' + id);
     if (page) page.classList.add('active');
     var navItem = document.querySelector('.nav-item[data-page="' + id + '"]');
-    if (navItem) {
-      navItem.classList.add('active');
-      navItem.scrollIntoView({ block: 'nearest' });
-    }
-    // Close sidebar on mobile
-    if (window.innerWidth <= 700) {
-      document.getElementById('sidebar').classList.remove('open');
-    }
+    if (navItem) navItem.classList.add('active');
+    // Always collapse the sidebar after selecting a page
+    document.body.classList.add('nav-hidden');
+    document.getElementById('sidebar').classList.remove('open');
     window.scrollTo(0, 0);
   }
+
+  // ── Sidebar toggle ───────────────────────────────────────────────
+  window.toggleNav = function() {
+    var hidden = document.body.classList.toggle('nav-hidden');
+    // On mobile also toggle the open class for the nav list
+    if (!hidden) {
+      document.getElementById('sidebar').classList.add('open');
+    } else {
+      document.getElementById('sidebar').classList.remove('open');
+    }
+  };
 
   // Wire up nav items
   document.addEventListener('DOMContentLoaded', function() {
